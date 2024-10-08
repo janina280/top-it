@@ -1,9 +1,9 @@
 package faculty.topit.repositories;
 
-import faculty.topit.models.ProductModel;
+import faculty.topit.models.CategoryModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductModel, Long> {
+public interface CategoryRepository extends JpaRepository<CategoryModel, String> {
 }
