@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
     @Autowired
     public CategoryService(CategoryRepository repository){
 

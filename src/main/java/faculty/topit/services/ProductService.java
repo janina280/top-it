@@ -1,10 +1,8 @@
 package faculty.topit.services;
 
 import faculty.topit.dtos.ProductDto;
-import faculty.topit.models.ProductModel;
 import faculty.topit.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +18,14 @@ public class ProductService {
     }
     public List<ProductDto> getAllProducts(){
         var products = productRepository.findAll();
-        var result = products.stream().map(ProductDto::new).collect(Collectors.toList());
 
-        return result;
+        return products.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     public ProductDto getProductById(Long id){
         var product=productRepository.getReferenceById(id);
-        var result = new ProductDto(product);
 
-        return  result;
+        return new ProductDto(product);
     }
 
     public void deleteProductById(Long id){
