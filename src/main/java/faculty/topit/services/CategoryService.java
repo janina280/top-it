@@ -17,7 +17,6 @@ public class CategoryService {
 
         categoryRepository = repository;
     }
-
     public List<CategoryDto> getAllCategories() {
         var categories = categoryRepository.findAll();
         return categories.stream().map(CategoryDto::new).collect(Collectors.toList());

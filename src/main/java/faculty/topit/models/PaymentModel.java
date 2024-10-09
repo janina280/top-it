@@ -8,13 +8,13 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Entity(name="Provider")
 @Data
-public class ProviderModel {
+@Entity(name="Payment")
+public class PaymentModel {
     @Id
     @Column(name="name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "provider")
-    private Set<ProductModel> products;
+    @OneToMany(mappedBy = "payment")
+    private Set<OrderModel> orders;
 }
