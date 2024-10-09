@@ -11,18 +11,20 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    @Autowired
-    public CategoryService(CategoryRepository repository){
 
-        categoryRepository=repository;
+    @Autowired
+    public CategoryService(CategoryRepository repository) {
+
+        categoryRepository = repository;
     }
-    public List<CategoryDto> getAllCategories(){
-        var categories= categoryRepository.findAll();
+
+    public List<CategoryDto> getAllCategories() {
+        var categories = categoryRepository.findAll();
         return categories.stream().map(CategoryDto::new).collect(Collectors.toList());
     }
 
-    public CategoryDto getCategoryByName(String name){
-        var category= categoryRepository.getReferenceById(name);
+    public CategoryDto getCategoryByName(String name) {
+        var category = categoryRepository.getReferenceById(name);
         return new CategoryDto(category);
     }
 
