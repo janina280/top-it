@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-@Entity(name="Payment")
+@Entity(name="payments")
 public class PaymentModel {
     @Id
     @Column(name="name", nullable = false)

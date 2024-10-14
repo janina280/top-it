@@ -8,7 +8,7 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Entity(name="Provider")
+@Entity(name="providers")
 @Data
 public class ProviderModel {
     @Id

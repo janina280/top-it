@@ -3,7 +3,7 @@ package faculty.topit.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity(name = "user")
+@Entity(name = "users")
 @Data
 public class UserModel {
     @Id
@@ -31,4 +31,14 @@ public class UserModel {
     @ManyToOne
     @JoinColumn(name="role_name")
     private RoleModel role;
+
+    public UserModel(String firstName, String lastName, String phoneNumber, String email, String password, String address, RoleModel role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.role = role;
+    }
 }

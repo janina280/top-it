@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-@Entity(name="Order")
+@Entity(name="orders")
 public class OrderModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

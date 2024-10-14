@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Entity(name="CartItem")
+@Entity(name="cart_items")
 public class CartItemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

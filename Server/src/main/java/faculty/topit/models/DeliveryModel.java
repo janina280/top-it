@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity(name="Delivery")
+@Entity(name="deliveries")
 public class DeliveryModel {
     @Id
     @Column(name="name", nullable = false)

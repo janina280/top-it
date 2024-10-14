@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.Set;
 
-@Entity(name = "Product")
+@Entity(name = "products")
 @Data
 public class ProductModel {
     @Id

@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-@Entity(name="Category")
+@Entity(name="categories")
 public class CategoryModel {
     @Id
     @Column(name="name", nullable = false)
