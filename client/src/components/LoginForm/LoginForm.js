@@ -54,7 +54,7 @@ function LoginForm(props) {
     };
 
     const redirectToRegister = () => {
-        navigate('/register'); 
+        navigate('/register');  
         props.updateTitle('Register');
     };
 
