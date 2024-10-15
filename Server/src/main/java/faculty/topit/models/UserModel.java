@@ -1,20 +1,27 @@
 package faculty.topit.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Entity(name = "users")
 @Data
-public class UserModel {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class UserModel implements UserDetails {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "firstName", nullable = false)
-    private String firstName;
-
-    @Column(name = "lastName", nullable = false)
-    private String lastName;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
@@ -28,17 +35,31 @@ public class UserModel {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @ManyToOne
-    @JoinColumn(name="role_name")
-    private RoleModel role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public UserModel(String firstName, String lastName, String phoneNumber, String email, String password, String address, RoleModel role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.role = role;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

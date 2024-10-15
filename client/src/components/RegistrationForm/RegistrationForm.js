@@ -11,8 +11,7 @@ function RegistrationForm(props) {
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
+    username: "",
     address: "",
     phoneNumber: "",
     successMessage: null,
@@ -34,8 +33,7 @@ function RegistrationForm(props) {
       const payload = {
         email: state.email,
         password: state.password,
-        firstName: state.firstName,
-        lastName: state.lastName,
+        username: state.username,
         address: state.address,
         phoneNumber: state.phoneNumber,
       };
@@ -91,19 +89,9 @@ function RegistrationForm(props) {
               <input
                 type="text"
                 className="register__input"
-                id="firstName"
-                placeholder="First Name"
-                value={state.firstName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="register__field">
-              <input
-                type="text"
-                className="register__input"
-                id="lastName"
-                placeholder="Last Name"
-                value={state.lastName}
+                id="username"
+                placeholder="UserName"
+                value={state.username}
                 onChange={handleChange}
               />
             </div>
@@ -167,29 +155,29 @@ function RegistrationForm(props) {
               <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
             </button>
           </form>
-          </div>
-          <div className="screen__background">
+        </div>
+        <div className="screen__background">
           <span className="screen__background__shape screen__background__shape4"></span>
           <span className="screen__background__shape screen__background__shape3"></span>
           <span className="screen__background__shape screen__background__shape2"></span>
           <span className="screen__background__shape screen__background__shape1"></span>
         </div>
-          <div
-            className="alert alert-success mt-2"
-            style={{ display: state.successMessage ? "block" : "none" }}
-            role="alert"
-          >
-            {state.successMessage}
-          </div>
-          <br/>
-          <div className="mt-2">
-            <span>Already have an account? </span>
-            <span className="loginText" onClick={() => redirectToLogin()}>
-              Login here
-            </span>
-          </div>
+        <div
+          className="alert alert-success mt-2"
+          style={{ display: state.successMessage ? "block" : "none" }}
+          role="alert"
+        >
+          {state.successMessage}
+        </div>
+        <br />
+        <div className="mt-2">
+          <span>Already have an account? </span>
+          <span className="loginText" onClick={() => redirectToLogin()}>
+            Login here
+          </span>
         </div>
       </div>
+    </div>
   );
 }
 
