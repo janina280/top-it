@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./RegistrationForm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import { useNavigate } from "react-router-dom";
 
@@ -81,111 +83,113 @@ function RegistrationForm(props) {
   };
 
   return (
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputFirstName1">First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            placeholder="Add First Name"
-            value={state.firstName}
-            onChange={handleChange}
-          />
+    <div className="container">
+      <div className="screen">
+        <div className="screen__content">
+          <form className="register">
+            <div className="register__field">
+              <input
+                type="text"
+                className="register__input"
+                id="firstName"
+                placeholder="First Name"
+                value={state.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="text"
+                className="register__input"
+                id="lastName"
+                placeholder="Last Name"
+                value={state.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="text"
+                className="register__input"
+                id="address"
+                placeholder="Address"
+                value={state.address}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="text"
+                className="register__input"
+                id="phoneNumber"
+                placeholder="Phone Number"
+                value={state.phoneNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="email"
+                className="register__input"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value={state.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="password"
+                className="register__input"
+                id="password"
+                placeholder="Password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register__field">
+              <input
+                type="password"
+                className="register__input"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                value={state.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              className="button register__submit"
+              onClick={handleSubmitClick}
+            >
+              <span class="button__text">Register</span>
+              <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
+            </button>
+          </form>
+          </div>
+          <div className="screen__background">
+          <span className="screen__background__shape screen__background__shape4"></span>
+          <span className="screen__background__shape screen__background__shape3"></span>
+          <span className="screen__background__shape screen__background__shape2"></span>
+          <span className="screen__background__shape screen__background__shape1"></span>
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputLastName1">Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="lastName"
-            placeholder="Add Last Name"
-            value={state.lastName}
-            onChange={handleChange}
-          />
+          <div
+            className="alert alert-success mt-2"
+            style={{ display: state.successMessage ? "block" : "none" }}
+            role="alert"
+          >
+            {state.successMessage}
+          </div>
+          <br/>
+          <div className="mt-2">
+            <span>Already have an account? </span>
+            <span className="loginText" onClick={() => redirectToLogin()}>
+              Login here
+            </span>
+          </div>
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputAddress1">Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="address"
-            placeholder="Address"
-            value={state.address}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputPhoneNumber1">Phone Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="phoneNumber"
-            placeholder="Phone Number"
-            value={state.phoneNumber}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={handleChange}
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Password"
-            value={state.password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputConfirmPassword1">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            value={state.confirmPassword}
-            onChange={handleChange}
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmitClick}
-        >
-          Register
-        </button>
-      </form>
-      <div
-        className="alert alert-success mt-2"
-        style={{ display: state.successMessage ? "block" : "none" }}
-        role="alert"
-      >
-        {state.successMessage}
       </div>
-      <div className="mt-2">
-        <span>Already have an account? </span>
-        <span className="loginText" onClick={() => redirectToLogin()}>
-          Login here
-        </span>
-      </div>
-    </div>
   );
 }
 
