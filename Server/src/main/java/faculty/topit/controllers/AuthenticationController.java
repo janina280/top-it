@@ -5,15 +5,14 @@ import faculty.topit.dtos.RegisterRequest;
 import faculty.topit.dtos.AuthenticationResponse;
 import faculty.topit.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/auth/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
-public class UserController {
+public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/authenticate")

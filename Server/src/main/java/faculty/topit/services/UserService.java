@@ -23,7 +23,7 @@ public class UserService {
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse registerUser(RegisterRequest user){
+    public AuthenticationResponse registerUser(RegisterRequest user) {
         var entity = UserModel.builder()
                 .address(user.getAddress())
                 .username(user.getUsername())
@@ -36,7 +36,7 @@ public class UserService {
 
         var jwtToken = jwtService.generateToken(userDetails);
 
-        return  AuthenticationResponse.builder()
+        return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
