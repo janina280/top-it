@@ -28,6 +28,7 @@ public class UserService {
                 .address(user.getAddress())
                 .username(user.getUsername())
                 .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .role(Role.USER)
                 .build();

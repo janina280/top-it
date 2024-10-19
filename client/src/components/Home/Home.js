@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiConstants';
-import axios from 'axios';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ACCESS_TOKEN_NAME, API_BASE_URL } from "../../constants/apiConstants";
+import axios from "axios";
 
 function Home() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + '/user/me', {
-        headers: { token: localStorage.getItem(ACCESS_TOKEN_NAME) },
+      .get(API_BASE_URL + "/user/me", {
+        headers: { Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN_NAME) },
       })
       .then(function (response) {
         if (response.status !== 200) {
@@ -22,14 +22,10 @@ function Home() {
   }, []);
 
   function redirectToLogin() {
-    navigate('/login'); 
+    navigate("/login");
   }
 
-  return (
-    <div className="mt-2">
-      Home page content
-    </div>
-  );
+  return <div className="mt-2">Home page content</div>;
 }
 
 export default Home;

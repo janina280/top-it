@@ -38,7 +38,7 @@ function RegistrationForm(props) {
         phoneNumber: state.phoneNumber,
       };
       axios
-        .post(API_BASE_URL + "/user/register", payload)
+        .post(API_BASE_URL + "/auth/register", payload)
         .then(function (response) {
           if (response.status === 200) {
             setState((prevState) => ({
