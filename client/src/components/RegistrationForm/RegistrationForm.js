@@ -151,7 +151,7 @@ function RegistrationForm(props) {
               className="button register__submit"
               onClick={handleSubmitClick}
             >
-              <span class="button__text">Register</span>
+              <span className="button__text">Register</span>
               <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
             </button>
           </form>

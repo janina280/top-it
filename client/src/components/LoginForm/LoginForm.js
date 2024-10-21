@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
   const [state, setState] = useState({
-    email: "",
+    username: "",
     password: "",
     successMessage: null,
   });
@@ -32,11 +32,11 @@ function LoginForm(props) {
   const handleSubmitClick = (e) => {
     e.preventDefault();
     const payload = {
-      email: state.email,
+      username: state.username,
       password: state.password,
     };
     axios
-      .post(API_BASE_URL + "/user/login", payload)
+      .post(API_BASE_URL + "/auth/authenticate", payload)
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({
@@ -75,12 +75,12 @@ function LoginForm(props) {
             <div className="login__field">
               <FontAwesomeIcon icon={faUser} className="login__icon" />
               <input
-                type="email"
+                type="text"
                 className="login__input"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Email"
-                value={state.email}
+                id="username"
+                aria-describedby="usernameHelp"
+                placeholder="Username"
+                value={state.username}
                 onChange={handleChange}
               />
             </div>
@@ -101,7 +101,7 @@ function LoginForm(props) {
               className="button login__submit"
               onClick={handleSubmitClick}
             >
-              <span class="button__text">Log In Now</span>
+              <span className="button__text">Log In Now</span>
               <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
             </button>
           </form>
@@ -130,7 +130,7 @@ function LoginForm(props) {
         >
           {state.successMessage}
         </div>
-        <br/>
+        <br />
         <div className="registerMessage">
           <span>Don't have an account? </span>
           <span className="loginText" onClick={() => redirectToRegister()}>
