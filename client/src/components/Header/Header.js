@@ -60,9 +60,8 @@ function Header(props) {
   Watch List
                   </NavLink>
               </Nav>
-              <Button className="custom-button me-2">Login</Button>
-<Button className="custom-button">Register</Button>
-
+              <Button className="custom-button me-2" onClick={() => {navigate('/login')}}>Login</Button>
+              <Button className="custom-button" onClick={() => {navigate('/register')}} >Register</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

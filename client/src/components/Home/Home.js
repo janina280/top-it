@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from "../../constants/apiConstants";
 import axios from "axios";
+import ProductTable from "./ProductTable";
 
 function Home() {
   const navigate = useNavigate();
@@ -25,7 +26,14 @@ function Home() {
     navigate("/login");
   }
 
-  return <div className="mt-2">Home page content</div>;
+  //todo: call api to get the products
+
+  const products;
+
+  return (
+  <div className="mt-2">Home page content</div>
+    <ProductTable data={products}></ProductTable>
+  );
 }
 
 export default Home;
