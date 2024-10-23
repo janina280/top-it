@@ -53,6 +53,7 @@ function LoginForm(props) {
         }
       })
       .catch(function (error) {
+        props.showError("Something went wrong!");
         console.log(error);
       });
   };

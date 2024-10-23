@@ -54,6 +54,7 @@ function RegistrationForm(props) {
           }
         })
         .catch(function (error) {
+          props.showError("Please enter valid username and password");
           console.log(error);
         });
     } else {
