@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDto>> getAllProducts(
     ) {
         return ResponseEntity.ok(productService.getAllProducts());

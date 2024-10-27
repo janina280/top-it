@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import {useAuth} from "../../AuthProvider";
 
 function Header(props) {
   const location = useLocation();  
@@ -18,6 +19,8 @@ function Header(props) {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
+
+  const auth = useAuth();
 
   let title = capitalize(location.pathname.substring(1, location.pathname.length));
   if (location.pathname === '/') {
@@ -37,8 +40,7 @@ function Header(props) {
   }
 
   function handleLogout() {
-    localStorage.removeItem(ACCESS_TOKEN_NAME);
-    navigate('/login');  
+    auth.logOut();
   }
 
   return (

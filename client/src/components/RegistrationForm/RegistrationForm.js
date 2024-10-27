@@ -41,12 +41,7 @@ function RegistrationForm(props) {
         .post(API_BASE_URL + "/auth/register", payload)
         .then(function (response) {
           if (response.status === 200) {
-            setState((prevState) => ({
-              ...prevState,
-              successMessage:
-                "Registration successful. Redirecting to home page..",
-            }));
-            localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
+            localStorage.setItem("site", response.data.token);
             redirectToHome();
             props.showError(null);
           } else {
@@ -63,13 +58,11 @@ function RegistrationForm(props) {
   };
 
   const redirectToHome = () => {
-    props.updateTitle("Home");
-    navigate("/home");
+    navigate("/");
   };
 
   const redirectToLogin = () => {
-    props.updateTitle("Login");
-    navigate("/login");
+    navigate("/");
   };
 
   const handleSubmitClick = (e) => {
@@ -162,13 +155,6 @@ function RegistrationForm(props) {
           <span className="screen__background__shape screen__background__shape3"></span>
           <span className="screen__background__shape screen__background__shape2"></span>
           <span className="screen__background__shape screen__background__shape1"></span>
-        </div>
-        <div
-          className="alert alert-success mt-2"
-          style={{ display: state.successMessage ? "block" : "none" }}
-          role="alert"
-        >
-          {state.successMessage}
         </div>
         <br />
         <div className="mt-2">

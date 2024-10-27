@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getImageUrl } from "../../utils/Utils";
 
 function ProductList(data) {
-  const [filters, setFilters] = React.useState(["SETUP", "LEARN"]);
+  const [filters, setFilters] = useState(["Name"]);
 
   const handleFilter = (filter) => {
     filters.includes(filter)
@@ -10,10 +10,9 @@ function ProductList(data) {
       : setFilters(filters.concat(filter));
   };
 
-  const filteredData = data.filter(
+  const filteredData = [data].filter(
     (item) =>
-      (filters.includes("SETUP") && item.type === "SETUP") ||
-      (filters.includes("LEARN") && item.type === "LEARN")
+      (filters.includes("Name") && item.type === "Name")
   );
 
   const listItems = filteredData.map((product) => (
@@ -30,24 +29,13 @@ function ProductList(data) {
   return (
     <>
       <div>
-        <label htmlFor="setup">
-          Include SETUP:
+        <label htmlFor="name">
+          Filter by name:
           <input
-            id="setup"
-            type="checkbox"
-            checked={filters.includes("SETUP")}
-            onChange={() => handleFilter("SETUP")}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="learn">
-          Include LEARN:
-          <input
-            id="learn"
-            type="checkbox"
-            checked={filters.includes("LEARN")}
-            onChange={() => handleFilter("LEARN")}
+            id="name"
+            type="text"
+            checked={filters.includes("Name")}
+            onChange={() => handleFilter("Name")}
           />
         </label>
       </div>

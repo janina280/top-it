@@ -1,30 +1,42 @@
-import React, { useEffect, useRef } from "react";
-import { ACCESS_TOKEN_NAME, API_BASE_URL } from "../../constants/apiConstants";
+import React, {useEffect, useState} from "react";
+import {API_BASE_URL} from "../../constants/apiConstants";
 import axios from "axios";
 import ProductList from "./ProductList";
+import {useAuth} from "../../AuthProvider";
 
 function Home(props) {
-  const products = useRef(0);
-
-  useEffect(() => {
-    axios
-      .get(API_BASE_URL + "/product/all", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN_NAME)}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status !== 200) {
-          products.current = response.data;
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const auth = useAuth();
+    useEffect(() => {
+        const fetchData = () => {
+            setIsLoading(true);
+            axios
+                .get(API_BASE_URL + "/product/all", {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`,
+                    },
+                })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        setProducts(response.data);
+                    }
+                })
+                .catch(function (error) {
+                    props.showError("Please enter valid username and password");
+                    console.log(error);
+                });
+            setIsLoading(false);
         }
-      })
-      .catch(function (error) {
-        props.showError("Please enter valid username and password");
-        console.log(error);
-      });
-  }, [props]);
+        props.updateTitle("Home");
+        fetchData();
+    });
 
-  return <ProductList data={products.current} />;
+    return (
+        {isLoading} ? (
+            <div>Loading ...</div>
+        ) : (<ProductList data={products}/>)
+    )
 }
 
 export default Home;
