@@ -8,35 +8,27 @@ function Home(props) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const auth = useAuth();
-    //todo: this never gets called
+    //todo: something is wrong between return an the products value
     useEffect(() => {
-        const fetchData = () => {
+        const fetchData = async () => {
             setIsLoading(true);
-            axios
+            const result = await axios
                 .get(API_BASE_URL + "/product/all", {
                     headers: {
                         Authorization: `Bearer ${auth.token}`,
                     },
-                })
-                .then(function (response) {
-                    if (response.status !== 200) {
-                        setProducts(response.data);
-                    }
-                })
-                .catch(function (error) {
-                    props.showError("Please enter valid username and password");
-                    console.log(error);
                 });
+            if (result.status !== 200) {
+                setProducts(result.data);
+            }
             setIsLoading(false);
         }
         props.updateTitle("Home");
         fetchData();
-    });
+    }, []);
 
     return (
-        {isLoading} ? (
-            <div>Loading ...</div>
-        ) : (<ProductList data={products}/>)
+        <ProductList data={products}/>
     )
 }
 
