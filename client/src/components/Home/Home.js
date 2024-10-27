@@ -8,6 +8,7 @@ function Home(props) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const auth = useAuth();
+    //todo: this never gets called
     useEffect(() => {
         const fetchData = () => {
             setIsLoading(true);
