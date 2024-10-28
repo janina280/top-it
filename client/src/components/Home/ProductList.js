@@ -2,27 +2,26 @@ import React, {useState} from "react";
 import {getImageUrl} from "../../utils/Utils";
 
 function ProductList({data}) {
-    const [filters, setFilters] = useState(["Name"]);
+    const [filters, setFilters] = useState("*");
 
     const handleFilter = (filter) => {
-        filters.includes(filter)
-            ? setFilters(filters.filter((value) => value !== filter))
-            : setFilters(filters.concat(filter));
+        setFilters(filter);
     };
 
     const filteredData = [data].filter(
         (item) =>
-            (filters.includes("Name") && item.type === "Name")
+            item.name.toLowerCase().includes(filters.toLowerCase())
     );
 
-    const listItems = data.map((product) => (
+    const listItems = filteredData.map((product) => (
         <li>
-            {/*<img src={getImageUrl(product)} alt={product.name}/>*/}
-            <p>
+            <div>
                 <b>{product.name}:</b>
-                {" " + product.description + " "}
-                known for {product.specification}
-            </p>
+                <span>${product.price}</span>
+                <br/>
+                <p>{product.description}</p>
+                <p>{product.specification}</p>
+            </div>
         </li>
     ));
 
@@ -34,8 +33,7 @@ function ProductList({data}) {
                     <input
                         id="name"
                         type="text"
-                        checked={filters.includes("Name")}
-                        onChange={() => handleFilter("Name")}
+                        onChange={(e) => handleFilter(e.target.value)}
                     />
                 </label>
             </div>

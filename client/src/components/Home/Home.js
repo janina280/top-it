@@ -23,7 +23,7 @@ function Home(props) {
                 return result.json();
             })
             .then(result => {
-                setProducts([...products, result]);
+                setProducts(result);
                 setIsLoading(false);
             })
             .catch(error => {
