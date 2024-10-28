@@ -42,8 +42,8 @@ function RegistrationForm(props) {
         .then(function (response) {
           if (response.status === 200) {
             localStorage.setItem("site", response.data.token);
-            redirectToHome();
             props.showError(null);
+            redirectToHome();
           } else {
             props.showError("Some error occurred");
           }
@@ -62,7 +62,7 @@ function RegistrationForm(props) {
   };
 
   const redirectToLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   const handleSubmitClick = (e) => {
