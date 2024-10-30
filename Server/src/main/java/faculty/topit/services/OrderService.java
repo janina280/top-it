@@ -2,6 +2,7 @@ package faculty.topit.services;
 
 import faculty.topit.dtos.ProductDto;
 import faculty.topit.models.ProductModel;
+import faculty.topit.repositories.OrderRepository;
 import faculty.topit.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,17 +11,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductService {
-    private final ProductRepository productRepository;
+public class OrderService {
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public ProductService(ProductRepository repository){
-        productRepository = repository;
+    public OrderService(OrderRepository repository){
+        orderRepository = repository;
     }
-    public List<ProductDto> getAllProducts(){
-        var products = productRepository.findAll();
+    public List<ProductDto> getOrderProductsByUser(String username){
+        var orders = orderRepository.findBy(username);
 
-        return products.stream().map(ProductDto::new).collect(Collectors.toList());
+        return orders.stream().map(OrderDto::new).collect(Collectors.toList());
     }
 
     public ProductDto getProductById(Long id){
@@ -36,4 +37,7 @@ public class ProductService {
     public void addProduct(ProductDto productDto){
         productRepository.save(new ProductModel(productDto));
     }
+
+    private bool
+
 }

@@ -1,5 +1,6 @@
 package faculty.topit.models;
 
+import faculty.topit.dtos.ProductDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -44,4 +45,16 @@ public class ProductModel {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "wishList_id"))
     private Set<WishListModel> wishLists;
+
+    public ProductModel() {}
+
+    public ProductModel(ProductDto model) {
+        this.id = model.getId();
+        this.name = model.getName();
+        this.specification = model.getSpecification();
+        this.description = model.getDescription();
+        this.stock = model.getStock();
+        this.price = model.getPrice();
+        //todo: provider
+    }
 }
