@@ -20,8 +20,12 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<ProductDto>> getAllProducts(
-    ) {
-        return ResponseEntity.ok(productService.getAllProducts());
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        try {
+            return ResponseEntity.ok(productService.getAllProducts());
+
+        } catch (Exception e) {
+            return (ResponseEntity<List<ProductDto>>) ResponseEntity.internalServerError();
+        }
     }
 }

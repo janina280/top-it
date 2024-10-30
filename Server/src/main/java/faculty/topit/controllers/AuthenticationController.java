@@ -16,15 +16,20 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody LoginRequest request
-    ) {
-        return ResponseEntity.ok(userService.authenticate(request));
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody LoginRequest request) {
+        try {
+            return ResponseEntity.ok(userService.authenticate(request));
+        } catch (Exception e) {
+            return (ResponseEntity<AuthenticationResponse>) ResponseEntity.internalServerError();
+        }
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request)
-    {
-        return ResponseEntity.ok(userService.registerUser(request));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+        try {
+            return ResponseEntity.ok(userService.registerUser(request));
+        } catch (Exception e) {
+            return (ResponseEntity<AuthenticationResponse>) ResponseEntity.internalServerError();
+        }
     }
 }
