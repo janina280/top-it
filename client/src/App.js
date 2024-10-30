@@ -13,54 +13,44 @@ function App() {
     const [title, updateTitle] = useState(null);
     const [errorMessage, updateErrorMessage] = useState(null);
 
-    return (
-        <div className="App">
+    return (<div className="App">
             <Router>
                 <AuthProvider showError={updateErrorMessage}
-                              children={
-                                  <>
-                                      <Header title={title}/>
-                                      <div className="container d-flex align-items-center flex-column">
-                                          <Routes>
-                                              <Route
-                                                  path="/register"
-                                                  element={
-                                                      <RegistrationForm
-                                                          showError={updateErrorMessage}
-                                                          updateTitle={updateTitle}
-                                                      />
-                                                  }
-                                              />
-                                              <Route
-                                                  path="/login"
-                                                  element={
-                                                      <LoginForm
-                                                          showError={updateErrorMessage}
-                                                          updateTitle={updateTitle}
-                                                      />
-                                                  }
-                                              />
-                                              <Route
-                                                  element={<PrivateRoute/>}>
-                                                  <Route path="/"
-                                                         element={
-                                                             <Home
-                                                                 showError={updateErrorMessage}
-                                                                 updateTitle={updateTitle}/>
-                                                         }/>
-                                              </Route>
-                                          </Routes>
-                                      </div>
-                                  </>}/>
+                              children={<>
+                                  <Header title={title}/>
+                                  <div className="container d-flex align-items-center flex-column">
+                                      <Routes>
+                                          <Route
+                                              path="/register"
+                                              element={<RegistrationForm
+                                                  showError={updateErrorMessage}
+                                                  updateTitle={updateTitle}
+                                              />}
+                                          />
+                                          <Route
+                                              path="/login"
+                                              element={<LoginForm
+                                                  showError={updateErrorMessage}
+                                                  updateTitle={updateTitle}
+                                              />}
+                                          />
+                                          <Route
+                                              element={<PrivateRoute/>}>
+                                              <Route path="/"
+                                                     element={<Home
+                                                         showError={updateErrorMessage}
+                                                         updateTitle={updateTitle}/>}/>
+                                          </Route>
+                                      </Routes>
+                                  </div>
+                              </>}/>
             </Router>
 
             <AlertComponent
                 errorMessage={errorMessage}
                 hideError={updateErrorMessage}
             />
-        </div>
-    )
-        ;
+        </div>);
 }
 
 export default App;

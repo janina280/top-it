@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {API_BASE_URL} from "../../constants/apiConstants";
-import ProductList from "./ProductList";
 import {useAuth} from "../../AuthProvider";
-import {DataGrid, GridToolbar} from "@mui/x-data-grid";
+import {DataGrid, GridActionsCellItem} from "@mui/x-data-grid";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Home(props) {
     const [products, setProducts] = useState([]);
@@ -11,7 +11,12 @@ function Home(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageNumber, setPageNumber] = useState(0);
     const [pageSize, setPageSize] = useState(100);
+    const [filters, setFilters] = useState("");
     const auth = useAuth();
+
+    const handleFilter = (filter) => {
+        setFilters(filter);
+    };
 
     const fetchData = () => {
         setIsLoading(true);
@@ -21,6 +26,9 @@ function Home(props) {
             },
         })
             .then(result => {
+                if (result.status === 403) {
+                    auth.value.logOut();
+                }
                 if (result.status !== 200) {
                     throw new Error(result.statusMessage);
                 }
@@ -60,66 +68,79 @@ function Home(props) {
         fetchData()
     }, [currentPage, pageSize]);
 
-    const columns = [
-        {field: 'id', headerName: 'ID', width: 90},
-        {
-            field: 'name',
-            headerName: 'Name',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
-            type: 'number',
-            width: 110,
-            editable: true,
-        },
-        {
-            field: 'stock',
-            headerName: 'Stock',
-            type: 'number',
-            width: 110,
-            editable: true,
-        },
-        {
-            field: 'description',
-            headerName: 'Description',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160
-        },
-        {
-            field: 'specification',
-            headerName: 'Specification',
-            width: 150,
-            sortable: false,
-            editable: true,
-        },
-    ];
+    function addCart(id) {
+        return undefined;
+    }
 
-    return isLoading ?
-        (<div>Loading... </div>) :
-        (
-            <div style={{height: 400, width: '100%'}}>
-                <DataGrid
-                    rows={products}
-                    columns={columns}
-                    pageSize={pageSize}
-                    rowsPerPageOptions={[10, 25, 50, 100]}
-                    disableSelectionOnClick
-                    pagination
-                    paginationMode="server"
-                    rowCount={totalItems}
-                    onPageChange={(e) => {
-                        handlePageChange(e);
-                    }}
-                    page={currentPage}
-                    getRowId={(row) => row.id}
-                    onPageSizeChange={handlePageSizeChange}
-                    slots={{toolbar: GridToolbar}}/>
-            </div>
-        );
+    function addToWishlist(id) {
+        return undefined;
+    }
+
+    const columns = [{field: 'id', headerName: 'ID', width: 90}, {
+        field: 'name', headerName: 'Name', width: 150,
+    }, {
+        field: 'price', headerName: 'Price', type: 'number', width: 110,
+    }, {
+        field: 'stock', headerName: 'Stock', type: 'number', width: 110,
+    }, {
+        field: 'description',
+        headerName: 'Description',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 300
+    }, {
+        field: 'specification', headerName: 'Specification', width: 300, sortable: false,
+    },
+        {
+            field: 'actions',
+            type: 'actions',
+            width: 80,
+            getActions: (params) => [
+                //todo: fix icons
+                <GridActionsCellItem
+                    icon={<FontAwesomeIcon icon="fa-solid fa-cart-plus"/>}
+                    label="Add to cart"
+                    onClick={addCart(params.id)}
+                />,
+                <GridActionsCellItem
+                    icon={<FontAwesomeIcon icon="fa-solid fa-heart"/>}
+                    label="Add to wishlist"
+                    onClick={addToWishlist(params.id)}
+                />
+            ],
+        },]
+
+    const filteredData = products.filter((item) => item.name.toLowerCase().includes(filters.toLowerCase()));
+
+    return isLoading ? (<div>Loading... </div>) : (<>
+        <div>
+            <label htmlFor="name">
+                Filter by name:
+                <input
+                    id="name"
+                    type="text"
+                    onChange={(e) => handleFilter(e.target.value)}
+                />
+            </label>
+        </div>
+        <div style={{height: "max-content", width: "max-content"}}>
+            <DataGrid
+                rows={filteredData}
+                columns={columns}
+                pageSize={pageSize}
+                rowsPerPageOptions={[10, 25, 50, 100]}
+                disableSelectionOnClick
+                pagination
+                paginationMode="server"
+                rowCount={totalItems}
+                onPageChange={(e) => {
+                    handlePageChange(e);
+                }}
+                page={currentPage}
+                getRowId={(row) => row.id}
+                onPageSizeChange={handlePageSizeChange}/>
+        </div>
+    </>);
 }
 
 export default Home;

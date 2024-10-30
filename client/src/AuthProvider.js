@@ -6,7 +6,7 @@ import axios from "axios";
 const AuthContext = createContext();
 
 const AuthProvider = (props) => {
-    const [token, setToken] = useState(localStorage.getItem("site") || "");
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
     const navigate = useNavigate();
 
     const loginAction = (data) => {
@@ -14,7 +14,7 @@ const AuthProvider = (props) => {
             .then(function (response) {
                 if (response.status === 200) {
                     setToken(response.data.token);
-                    localStorage.setItem("site", response.data.token);
+                    localStorage.setItem("token", response.data.token);
                     navigate("/");
                 }
                 else{
@@ -29,7 +29,7 @@ const AuthProvider = (props) => {
 
     const logOut = () => {
         setToken("");
-        localStorage.removeItem("site");
+        localStorage.removeItem("token");
         navigate("/login");
     };
 
