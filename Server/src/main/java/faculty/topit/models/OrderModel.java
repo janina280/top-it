@@ -9,6 +9,11 @@ import java.util.Set;
 @Data
 @Entity(name="orders")
 public class OrderModel {
+    public OrderModel(OrderStatus status, UserModel user) {
+        Status = status;
+        this.user = user;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable = false)
@@ -23,4 +28,12 @@ public class OrderModel {
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private PaymentModel payment;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserModel user;
+
+    public OrderModel() {
+
+    }
 }

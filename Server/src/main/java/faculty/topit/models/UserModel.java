@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Entity(name = "users")
 @Data
@@ -32,6 +33,9 @@ public class UserModel implements UserDetails {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @OneToMany(mappedBy = "user")
+    private Set<OrderModel> orders;
 
     @Enumerated(EnumType.STRING)
     private Role role;

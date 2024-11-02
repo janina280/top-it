@@ -2,9 +2,11 @@ package faculty.topit.models;
 
 import faculty.topit.enums.OrderStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 @Entity(name="cart_items")
 public class CartItemModel {
     @Id
@@ -22,4 +24,9 @@ public class CartItemModel {
     @ManyToOne
     @JoinColumn(name="order_id")
     private OrderModel order;
+
+    public CartItemModel(int quantity, ProductModel product) {
+    this.quantity = quantity;
+    this.product = product;
+    }
 }
