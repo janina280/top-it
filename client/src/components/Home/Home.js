@@ -48,7 +48,7 @@ function Home(props) {
                 setProducts([]);
                 setTotalItems(0);
                 console.log(error);
-                props.showError(error);
+                props.showError(error.message);
             });
     };
 

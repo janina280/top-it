@@ -7,6 +7,7 @@ const AuthContext = createContext();
 
 const AuthProvider = (props) => {
     const [token, setToken] = useState(localStorage.getItem("token") || "");
+    //todo:permissions
     const navigate = useNavigate();
 
     const loginAction = (data) => {
@@ -14,10 +15,10 @@ const AuthProvider = (props) => {
             .then(function (response) {
                 if (response.status === 200) {
                     setToken(response.data.token);
+                    props.showError(null);
                     localStorage.setItem("token", response.data.token);
                     navigate("/");
-                }
-                else{
+                } else {
                     props.showError("Username and password do not match");
                 }
             })
@@ -29,6 +30,7 @@ const AuthProvider = (props) => {
 
     const logOut = () => {
         setToken("");
+        props.showError("Session expired!");
         localStorage.removeItem("token");
         navigate("/login");
     };
