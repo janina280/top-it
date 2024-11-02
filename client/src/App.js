@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
+import AddProductForm from "./components/Product/AddProduct";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import Home from "./components/Home/Home";
@@ -26,6 +27,12 @@ function App() {
                                                   showError={updateErrorMessage}
                                                   updateTitle={updateTitle}
                                               />}
+                                          />
+                                          <Route
+                                            path="/addProduct"
+                                            element={<AddProductForm
+                                                  showError={updateErrorMessage}
+                                                  updateTitle={updateTitle} />}
                                           />
                                           <Route
                                               path="/login"

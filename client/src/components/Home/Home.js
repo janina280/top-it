@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../constants/apiConstants";
 import { useAuth } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
-import AddCircleOutlineOutlined from "@mui/icons-material/AddCircleOutlineOutlined";
-import IconButton from "@mui/material/IconButton";
-import { Stack, TextField, FormControl, FormLabel } from '@mui/material';
+import { Stack, TextField, FormControl } from "@mui/material";
 
 function Home(props) {
   const [products, setProducts] = useState([]);
@@ -17,8 +16,9 @@ function Home(props) {
   const [pageSize, setPageSize] = useState(100);
   const [filters, setFilters] = useState("");
   const auth = useAuth();
+  const navigate = useNavigate();
 
-  const handleFilter = (filter) => {                            
+  const handleFilter = (filter) => {
     setFilters(filter);
   };
 
@@ -140,46 +140,45 @@ function Home(props) {
     <div>Loading... </div>
   ) : (
     <>
-    <Stack>
-      <IconButton
-        color="default"
-        aria-label="add new product"
-        sx={{ height: "70px", width: "70px" }}
-      >
-        <AddCircleOutlineOutlined sx={{ fontSize: "30px" }} />
-      </IconButton>
+      <Stack spacing={2} sx={{ padding: 2 }}>
+        <button
+          type="submit"
+          className="button addProduct__submit"
+          onClick={() => navigate("/addProduct")}
+        >
+          <span className="button__text">Add New Product</span>
+        </button>
 
-      <Stack spacing={2} >
-      <FormControl>
-        <FormLabel htmlFor="name">Filter by name:</FormLabel>
-        <TextField
-          id="name"
-          type = "search" 
-          placeholder = "Search..." 
-          onChange={(e) => handleFilter(e.target.value)}
-        />
-      </FormControl>
-    </Stack>
-      <Stack sx={{ height: "600px", width: "100%" }}>
-        <DataGrid
-          rows={filteredData}
-          columns={columns}
-          pageSize={pageSize}
-          rowsPerPageOptions={[10, 25, 50, 100]}
-          disableSelectionOnClick
-          pagination
-          disableAutosize
-          ignoreDiacritics
-          paginationMode="client"
-          rowCount={totalItems}
-          onPageChange={(e) => {
-            handlePageChange(e);
-          }}
-          page={currentPage}
-          getRowId={(row) => row.id}
-          onPageSizeChange={handlePageSizeChange}
-        />
-      </Stack>
+        <FormControl variant="outlined">
+          <TextField
+            id="name"
+            type="search"
+            placeholder="Search..."
+            sx={{ width: 300 }}
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+        </FormControl>
+
+        <Stack sx={{ height: "600px", width: "100%" }}>
+          <DataGrid
+            rows={filteredData}
+            columns={columns}
+            pageSize={pageSize}
+            rowsPerPageOptions={[10, 25, 50, 100]}
+            disableSelectionOnClick
+            pagination
+            disableAutosize
+            ignoreDiacritics
+            paginationMode="client"
+            rowCount={totalItems}
+            onPageChange={(e) => {
+              handlePageChange(e);
+            }}
+            page={currentPage}
+            getRowId={(row) => row.id}
+            onPageSizeChange={handlePageSizeChange}
+          />
+        </Stack>
       </Stack>
     </>
   );
