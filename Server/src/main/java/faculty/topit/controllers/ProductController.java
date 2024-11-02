@@ -28,4 +28,11 @@ public class ProductController {
             return (ResponseEntity<List<ProductDto>>) ResponseEntity.internalServerError();
         }
     }
+
+    @PostMapping("/add")
+    public ResponseEntity addProduct(@RequestBody ProductDto productDto) {
+        productService.addProduct(productDto);
+        return (ResponseEntity) ResponseEntity.ok();
+    }
+
 }
