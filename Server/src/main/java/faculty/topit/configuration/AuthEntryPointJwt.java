@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
@@ -32,4 +31,3 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         mapper.writeValue(response.getOutputStream(), body);
     }
 }
-*/

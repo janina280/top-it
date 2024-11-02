@@ -19,14 +19,14 @@ public class SecurityConfiguration {
 
     private static final String WHITE_LIST_URL = "/api/auth/**";
     private final JwtAuthenticationFilter jwtAuthFilter;
-    //private final AuthenticationEntryPoint unauthenticationEntryPoint;
+    private final AuthenticationEntryPoint unauthenticationEntryPoint;
 
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-                //.exceptionHandling(ex -> ex.authenticationEntryPoint(unauthenticationEntryPoint))
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
