@@ -24,6 +24,6 @@ public class ProductDto {
         this.specification = model.getSpecification();
         this.description = model.getDescription();
         this.stock = model.getStock();
-        this.price = model.getPrice();
+        this.price = model.getPrice(); 
     }
 }

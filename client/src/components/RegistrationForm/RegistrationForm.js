@@ -41,7 +41,7 @@ function RegistrationForm(props) {
         .post(API_BASE_URL + "/auth/register", payload)
         .then(function (response) {
           if (response.status === 200) {
-            localStorage.setItem("site", response.data.token);
+            localStorage.setItem("token", response.data.token);
             props.showError(null);
             redirectToHome();
           } else {
