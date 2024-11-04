@@ -1,6 +1,7 @@
 package faculty.topit.services;
 
 import faculty.topit.dtos.CategoryDto;
+import faculty.topit.models.CategoryModel;
 import faculty.topit.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,10 @@ public class CategoryService {
 
     public void deleteCategory(String name) {
         categoryRepository.deleteById(name);
+    }
+
+    public void addCategory(CategoryDto categoryDto)
+    {
+        categoryRepository.save(new CategoryModel(categoryDto));
     }
 }
