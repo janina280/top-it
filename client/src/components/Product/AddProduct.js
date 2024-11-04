@@ -70,11 +70,11 @@ function AddProductForm(props) {
 
   return (
     <div>
-      <button type="submit" className="button addProduct__submit">
+      <button className="button addProduct__submit">
         <span className="button__text">Add New Category</span>
         <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
       </button>
-      <button type="submit" className="button addProduct__submit">
+      <button  className="button addProduct__submit">
         <span className="button__text">Add New Provider</span>
         <FontAwesomeIcon icon={faChevronRight} className="button__icon" />
       </button>
